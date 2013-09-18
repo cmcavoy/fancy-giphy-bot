@@ -43,4 +43,4 @@ bot.on('botMessage', function(bot, message) {
   }
 });
 
-bot.serve(3000);
+bot.serve(process.env['PORT'] || 3000);
