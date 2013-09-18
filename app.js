@@ -36,22 +36,11 @@ bot.on('botMessage', function(bot, message) {
         if (data.data.length) {
           var id = data.data[0].id;
           var imageUrl = "http://media3.giphy.com/media/" + id + "/giphy.gif";
-          console.log(util.inspect(data.data));
-          console.log("image url " + imageUrl);
-          request(imageUrl).pipe(request.post('https://image.groupme.com/pictures',
-                                              function(err, response, body) {
-                                                if (err) console.log("error " + err);
-                                                console.log("response " + util.inspect(response));
-                                                console.log("got a groupme image back " + body);
-                                                bot.message(body);
-                                              })
-                                );
-
+          bot.message(imageUrl);
         }
       });
     }
-
-  };
+  }
 });
 
 bot.serve(3000);
