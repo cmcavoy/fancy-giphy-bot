@@ -30,7 +30,7 @@ bot.on('botMessage', function(bot, message) {
     if (tokens.indexOf('giphybot') >= 0) {
       tokens = _.without(tokens, 'giphybot');
       console.log("searching for " + tokens);
-      giphy.search(tokens.toString(), 1, 0, function(err, data) {
+      giphy.search(escape(tokens.join('+')), 1, 0, function(err, data) {
         if (err) console.error(err);
         console.log("giphy returned " + util.inspect(data));
         if (data.data.length) {
