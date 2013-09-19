@@ -16,7 +16,7 @@
     "url": "https://github.com/cmcavoy/giphybot/issues"
   },
   "dependencies": {
-    "fancy-groupme-bot": "0.0.1",
+    "fancy-groupme-bot": "0.1.2",
     "giphy-wrapper": "0.0.1",
     "underscore": "~1.5.2",
     "natural": "~0.1.21",
