@@ -9,12 +9,18 @@ const request = require('request');
 
 var tokenizer = new natural.WordTokenizer();
 
+var config =  { token:GROUPMETOKEN,
+                name: "giphybot",
+                group: GROUP,
+                url: URL };
+
+const AVATAR = process.env['AVATAR'];
+if (AVATAR) {
+  config.avatar = AVATAR;
+}
+
 var giphy = require('giphy-wrapper')(GIPHYTOKEN);
-var bot = require('fancy-groupme-bot')(
-  { token:GROUPMETOKEN,
-    name: "giphybot",
-    group: GROUP,
-    url: URL });
+var bot = require('fancy-groupme-bot')(config);
 
 bot.on('botRegistered', function() {
   console.log("online");
@@ -27,14 +33,15 @@ bot.on('botMessage', function(bot, message) {
 
     tokens = _.map(tokens, function(t) { return t.toLowerCase(); });
 
-    if (tokens.indexOf('giphybot') >= 0) {
+    if (tokens.indexOf('giphybot') >= 0 || tokens.indexOf('g') >= 0) {
       tokens = _.without(tokens, 'giphybot');
       console.log("searching for " + tokens);
-      giphy.search(escape(tokens.join('+')), 1, 0, function(err, data) {
+      giphy.search(escape(tokens.join('+')), 20, 0, function(err, data) {
         if (err) console.error(err);
         console.log("giphy returned " + util.inspect(data));
         if (data.data.length) {
-          var id = data.data[0].id;
+          data = _.shuffle(data.data);
+          var id = data[0].id;
           var imageUrl = "http://media3.giphy.com/media/" + id + "/giphy.gif";
           bot.message(imageUrl);
         }
