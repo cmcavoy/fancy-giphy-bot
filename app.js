@@ -12,11 +12,12 @@ var tokenizer = new natural.WordTokenizer();
 var config =  { token:GROUPMETOKEN,
                 name: "giphybot",
                 group: GROUP,
-                url: URL };
+                url: URL
+              };
 
 const AVATAR = process.env['AVATAR'];
 if (AVATAR) {
-  config.avatar = AVATAR;
+  config.avatar_url = AVATAR;
 }
 
 var giphy = require('giphy-wrapper')(GIPHYTOKEN);
