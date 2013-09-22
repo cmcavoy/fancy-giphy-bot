@@ -44,6 +44,7 @@ bot.on('botMessage', function(bot, message) {
           data = _.shuffle(data.data);
           var id = data[0].id;
           var imageUrl = "http://media3.giphy.com/media/" + id + "/giphy.gif";
+          console.log("sending a message " + imageUrl);
           bot.message(imageUrl);
         }
       });
